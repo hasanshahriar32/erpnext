@@ -1,4 +1,14 @@
 <svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 20C0 8.9543 8.9543 0 20 0H97.03C108.076 0 117.03 8.9543 117.03 20V97.03C117.03 108.076 108.076 117.03 97.03 117.03H20C8.9543 117.03 0 108.076 0 97.03V20Z" fill="#067EFB"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M78.8631 38.557H76.9H51.38H38.6199V28.0872H78.8631V38.557ZM51.3799 63.0955V77.4915H79.1903V87.9612H38.6199V52.6257H51.3799H76.9V63.0955H51.3799Z" fill="white"/>
+  <defs>
+    <linearGradient id="pGradSquare" x1="15" y1="15" x2="103" y2="103" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="118" height="118" rx="28" fill="#0B0F19"/>
+  <rect x="2" y="2" width="114" height="114" rx="26" stroke="url(#pGradSquare)" stroke-width="3.5"/>
+  <path d="M38 88V30H66C78.1503 30 88 39.8497 88 52C88 64.1503 78.1503 74 66 74H52V88H38Z" fill="url(#pGradSquare)"/>
+  <path d="M52 44V60H66C70.4183 60 74 56.4183 74 52C74 47.5817 70.4183 44 66 44H52Z" fill="#0B0F19"/>
+  <circle cx="66" cy="52" r="4.5" fill="#38BDF8"/>
 </svg>

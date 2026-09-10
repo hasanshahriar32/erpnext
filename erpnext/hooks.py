@@ -1,25 +1,32 @@
 app_name = "erpnext"
-app_title = "ERPNext"
-app_publisher = "Frappe Technologies Pvt. Ltd."
-app_description = """ERP made simple"""
+app_title = "Paradox-BD ERP"
+app_publisher = "Paradox Tech BD"
+app_description = """Paradox-BD Intelligent Enterprise Resource Planning & Operations Cockpit"""
 app_icon = "fa fa-th"
-app_color = "#e74c3c"
-app_email = "hello@frappe.io"
+app_color = "#6366f1"
+app_email = "support@paradox-bd.com"
 app_license = "GNU General Public License (v3)"
-source_link = "https://github.com/frappe/erpnext"
-app_logo_url = "/assets/erpnext/images/erpnext-logo.svg"
+source_link = "https://github.com/hasanshahriar32/erpnext"
+app_logo_url = "/assets/erpnext/images/paradox-logo.svg"
 app_home = "/desk/home"
 
 add_to_apps_screen = [
 	{
 		"name": app_name,
-		"logo": "/assets/erpnext/images/erpnext-logo.svg",
+		"logo": "/assets/erpnext/images/paradox-logo.svg",
 		"title": app_title,
 		"route": app_home,
 		"has_permission": "erpnext.check_app_permission",
 		"sequence_id": 1,
 	}
 ]
+
+website_context = {
+	"favicon": "/assets/erpnext/images/paradox-favicon.svg",
+	"splash_image": "/assets/erpnext/images/paradox-logo.svg",
+	"app_name": "Paradox-BD ERP",
+}
+
 
 # Modules that are a folder of code and nothing else. Their doctypes, reports and controllers stay
 # where they are; what they no longer own is navigation, which now sits in the sidebar named beside
