@@ -13,10 +13,10 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: "${DB_PORT:-11240}"
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: "${DB_PORT:-3306}"
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-grammarpro}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:-grammarpro}
     depends_on:
       configurator:
         condition: service_completed_successfully
@@ -36,14 +36,13 @@ services:
         ls -1 apps > sites/apps.txt;
         bench set-config -g db_host $$DB_HOST;
         bench set-config -gp db_port $$DB_PORT;
-        bench set-config -g db_ssl 1;
         bench set-config -g redis_cache "redis://$$REDIS_CACHE";
         bench set-config -g redis_queue "redis://$$REDIS_QUEUE";
         bench set-config -g redis_socketio "redis://$$REDIS_QUEUE";
         bench set-config -gp socketio_port $$SOCKETIO_PORT;
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: "${DB_PORT:-11240}"
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: "${DB_PORT:-3306}"
       REDIS_CACHE: redis-cache:6379
       REDIS_QUEUE: redis-queue:6379
       SOCKETIO_PORT: "9000"
@@ -85,11 +84,41 @@ services:
         if [ -d "sites/${SITE_NAME:-erp.nirog.me}" ]; then
           echo "Site ${SITE_NAME:-erp.nirog.me} already exists, skipping creation";
         else
-          bench new-site --mariadb-user-host-login-scope='%' --admin-password=${ADMIN_PASSWORD:-grammarpro} --db-root-username=${DB_USER:-avnadmin} --db-root-password=${DB_PASSWORD} --install-app erpnext --set-default ${SITE_NAME:-erp.nirog.me};
+          bench new-site --mariadb-user-host-login-scope='%' --admin-password=${ADMIN_PASSWORD:-grammarpro} --db-root-username=${DB_USER:-root} --db-root-password=${DB_PASSWORD:-grammarpro} --install-app erpnext --set-default ${SITE_NAME:-erp.nirog.me};
         fi;
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: "${DB_PORT:-11240}"
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: "${DB_PORT:-3306}"
+
+  db:
+    image: mariadb:11.8
+    networks:
+      - frappe_network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 180M
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --innodb-buffer-pool-size=96M
+      - --innodb-log-buffer-size=8M
+      - --max-connections=30
+      - --key-buffer-size=16M
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-grammarpro}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:-grammarpro}
+    volumes:
+      - db-data:/var/lib/mysql
 
   frontend:
     image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
@@ -239,6 +268,7 @@ services:
         condition: service_completed_successfully
 
 volumes:
+  db-data:
   redis-queue-data:
   sites:
   logs:
