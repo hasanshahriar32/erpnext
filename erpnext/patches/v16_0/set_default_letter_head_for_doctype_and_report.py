@@ -3,12 +3,16 @@ from frappe.query_builder import DocType
 
 
 def execute():
+	if not frappe.db.has_column("Letter Head", "letter_head_for"):
+		return
+
 	LH = DocType("Letter Head")
 	update_letter_head_for_query = (
 		frappe.qb.update(LH).set(LH.letter_head_for, "DocType").where(LH.letter_head_for.isnull())
 	)
 
 	update_letter_head_for_query.run()
+
 
 	for letter_head_for in ("DocType", "Report"):
 		default_exists = frappe.db.exists(

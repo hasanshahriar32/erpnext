@@ -45,22 +45,25 @@ def boot_session(bootinfo):
 		if not bootinfo.customer_count:
 			bootinfo.setup_complete = "Yes" if frappe.db.get_all("Company", limit=1) else "No"
 
+		company_fields = [
+			"name",
+			"default_currency",
+			"cost_center",
+			"default_selling_terms",
+			"default_buying_terms",
+			"default_letter_head",
+			"default_bank_account",
+			"enable_perpetual_inventory",
+			"country",
+			"exchange_gain_loss_account",
+			"bank_charges_account",
+		]
+		if frappe.db.has_column("Company", "default_letter_head_report"):
+			company_fields.append("default_letter_head_report")
+
 		companies = frappe.get_all(
 			"Company",
-			fields=[
-				"name",
-				"default_currency",
-				"cost_center",
-				"default_selling_terms",
-				"default_buying_terms",
-				"default_letter_head",
-				"default_letter_head_report",
-				"default_bank_account",
-				"enable_perpetual_inventory",
-				"country",
-				"exchange_gain_loss_account",
-				"bank_charges_account",
-			],
+			fields=company_fields,
 			limit_page_length=0,  # intentionally unbounded: all companies are needed for boot
 		)
 		for company in companies:
