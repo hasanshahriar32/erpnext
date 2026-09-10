@@ -419,7 +419,28 @@
 		});
 	}
 
-	// 8. Avatar Dropdown Menu Hook
+	// 8. Theme Synchronization & Modal Heading Enhancer
+	function syncThemeAndHeading() {
+		const root = document.documentElement;
+		const mode = (root.getAttribute("data-theme-mode") || root.getAttribute("data-theme") || "light").toLowerCase();
+		const isLight = mode === "light";
+		const normalized = isLight ? "light" : "dark";
+
+		if (root.getAttribute("data-theme") !== normalized) {
+			root.setAttribute("data-theme", normalized);
+		}
+		if (document.body && document.body.getAttribute("data-theme") !== normalized) {
+			document.body.setAttribute("data-theme", normalized);
+		}
+
+		// Dynamically enforce high-contrast modal heading color
+		const headingEls = document.querySelectorAll('.desktop-modal-heading, .desktop-modal-heading *, .title-widget, .title-widget *');
+		headingEls.forEach(el => {
+			el.style.setProperty('color', isLight ? '#0f172a' : '#ffffff', 'important');
+		});
+	}
+
+	// 9. Avatar Dropdown Menu Hook
 	function hookAvatarMenu() {
 		document.querySelectorAll('.dropdown-menu a, .dropdown-menu .dropdown-item').forEach(item => {
 			if (item.textContent.includes("Frappe Support")) {
@@ -438,6 +459,7 @@
 	// Master run loop
 	function runParadoxEngine() {
 		try {
+			syncThemeAndHeading();
 			hookTranslations();
 			hookAboutDialog();
 			applySidebarBranding();
@@ -485,9 +507,10 @@
 		// Modal Event hooks (jQuery / Bootstrap)
 		if (window.$) {
 			$(document).on("show.bs.modal shown.bs.modal", () => {
-				setTimeout(applyParadoxCustomIcons, 10);
-				setTimeout(applyParadoxCustomIcons, 80);
-				setTimeout(applyParadoxCustomIcons, 250);
+				syncThemeAndHeading();
+				setTimeout(() => { applyParadoxCustomIcons(); syncThemeAndHeading(); }, 10);
+				setTimeout(() => { applyParadoxCustomIcons(); syncThemeAndHeading(); }, 80);
+				setTimeout(() => { applyParadoxCustomIcons(); syncThemeAndHeading(); }, 250);
 			});
 		}
 

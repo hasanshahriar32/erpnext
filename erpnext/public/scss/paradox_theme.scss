@@ -1217,16 +1217,14 @@ body[data-path="login"] {
   box-shadow: 0 25px 80px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(99, 102, 241, 0.2) !important;
 }
 
-[data-theme="dark" i] .desktop-modal-heading .modal-title,
-[data-theme-mode="dark" i] .desktop-modal-heading .modal-title,
-[data-theme="dark" i] .desktop-modal-heading .title-section .modal-title,
-[data-theme-mode="dark" i] .desktop-modal-heading .title-section .modal-title,
-:root:not([data-theme="light" i]):not([data-theme-mode="light" i]) .desktop-modal-heading .modal-title,
-:root:not([data-theme="light" i]):not([data-theme-mode="light" i]) .desktop-modal-heading .title-section .modal-title {
+[data-theme="dark" i] .desktop-modal-heading,
+[data-theme="dark" i] .desktop-modal-heading *,
+[data-theme-mode="dark" i] .desktop-modal-heading,
+[data-theme-mode="dark" i] .desktop-modal-heading *,
+:root:not([data-theme="light" i]):not([data-theme-mode="light" i]) .desktop-modal-heading,
+:root:not([data-theme="light" i]):not([data-theme-mode="light" i]) .desktop-modal-heading * {
   color: #ffffff !important;
   font-weight: 700 !important;
-  font-size: 26px !important;
-  letter-spacing: -0.5px !important;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7) !important;
 }
 
@@ -1272,14 +1270,12 @@ body[data-path="login"] {
   box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.16), 0 0 25px rgba(99, 102, 241, 0.08) !important;
 }
 
-[data-theme="light" i] .desktop-modal-heading .modal-title,
-[data-theme-mode="light" i] .desktop-modal-heading .modal-title,
-[data-theme="light" i] .desktop-modal-heading .title-section .modal-title,
-[data-theme-mode="light" i] .desktop-modal-heading .title-section .modal-title {
+[data-theme="light" i] .desktop-modal-heading,
+[data-theme="light" i] .desktop-modal-heading *,
+[data-theme-mode="light" i] .desktop-modal-heading,
+[data-theme-mode="light" i] .desktop-modal-heading * {
   color: #0f172a !important;
   font-weight: 700 !important;
-  font-size: 26px !important;
-  letter-spacing: -0.5px !important;
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
 }
 
