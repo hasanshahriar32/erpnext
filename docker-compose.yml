@@ -1,6 +1,6 @@
 services:
   backend:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -22,7 +22,7 @@ services:
         condition: service_completed_successfully
 
   configurator:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -51,7 +51,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -121,7 +121,7 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     depends_on:
@@ -151,7 +151,7 @@ services:
       - "${HTTP_PORT:-8085}:8080"
 
   queue-long:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -176,7 +176,7 @@ services:
         condition: service_completed_successfully
 
   queue-short:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -225,7 +225,7 @@ services:
           memory: 32M
 
   scheduler:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
@@ -245,7 +245,7 @@ services:
         condition: service_completed_successfully
 
   websocket:
-    image: frappe/erpnext:${ERPNEXT_VERSION:-v16.34.2}
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.34.2}
     networks:
       - frappe_network
     deploy:
