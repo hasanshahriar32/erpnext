@@ -171,19 +171,44 @@
 	// 6. Desktop App Launcher Grid Redesign (#page-desktop)
 	function redesignDesktopAppGrid() {
 		const isDesktopRoute = window.location.pathname === "/desk" || (window.frappe && frappe.get_route_str && frappe.get_route_str() === "desktop");
-		if (!isDesktopRoute) return;
+		// Clean stale desktop layout from localStorage
+		try {
+			const currentUser = (window.frappe && frappe.session && frappe.session.user) || "Administrator";
+			const saved = localStorage.getItem(`${currentUser}:desktop`);
+			if (saved && (saved.includes("Framework") || saved.includes("ERPNext Settings") || saved.includes('"label":"ERPNext"'))) {
+				localStorage.removeItem(`${currentUser}:desktop`);
+				if (window.frappe && frappe.pages && frappe.pages.desktop && frappe.pages.desktop.desktop_page) {
+					frappe.pages.desktop.desktop_page.update();
+				}
+			}
+		} catch (e) {}
 
-		// Hide Framework and Frappe Framework icons
-		document.querySelectorAll('.desktop-icon[data-id="Framework"], .desktop-icon[data-id="Frappe Framework"], .desktop-icon[data-id="ERPNext"]').forEach(el => {
-			el.style.display = 'none';
+		// Hide Framework and Frappe Framework developer icons
+		const devIconIds = [
+			"Framework", "Frappe Framework", "ERPNext", "My Workspaces",
+			"Automation", "Build", "Data", "Email", "Integrations", "Printing", "System", "Users", "Website"
+		];
+		devIconIds.forEach(id => {
+			document.querySelectorAll(`.desktop-icon[data-id="${id}"]`).forEach(el => {
+				el.style.display = 'none';
+			});
 		});
 
 		// Rename ERPNext Settings icon to Paradox Settings
-		const settingsIcon = document.querySelector('.desktop-icon[data-id="ERPNext Settings"]');
+		const settingsIcon = document.querySelector('.desktop-icon[data-id="ERPNext Settings"], .desktop-icon[data-id="Paradox Settings"]');
 		if (settingsIcon) {
 			const titleEl = settingsIcon.querySelector('.icon-title');
 			if (titleEl && titleEl.textContent !== "Paradox Settings") {
 				titleEl.textContent = "Paradox Settings";
+			}
+		}
+
+		// Rename Home icon to Operations Cockpit if present
+		const homeIcon = document.querySelector('.desktop-icon[data-id="Home"]');
+		if (homeIcon) {
+			const homeTitle = homeIcon.querySelector('.icon-title');
+			if (homeTitle && homeTitle.textContent === "Home") {
+				homeTitle.textContent = "Operations Cockpit";
 			}
 		}
 
@@ -196,10 +221,36 @@
 			hero.innerHTML = `
 				<div class="appgrid-badge">PARADOX-BD ENTERPRISE SUITE</div>
 				<h2 class="appgrid-title">Application Operations Directory</h2>
-				<p class="appgrid-subtitle">Access core enterprise modules, supply chain operations, financial ledgers, and administration.</p>
+				<p class="appgrid-subtitle">Central access gateway to enterprise modules, multi-channel sales, supply chain ledgers, and administration.</p>
 			`;
 			desktopContainer.prepend(hero);
 		}
+
+		// Make brand logo clickable to /desk
+		const brandLogo = document.getElementById('brand-logo');
+		if (brandLogo && !brandLogo.dataset.paradoxBound) {
+			brandLogo.dataset.paradoxBound = "true";
+			brandLogo.style.cursor = "pointer";
+			brandLogo.onclick = function() {
+				window.location.href = "/desk";
+			};
+		}
+	}
+
+	// 7. Avatar Dropdown Menu Hook
+	function hookAvatarMenu() {
+		document.querySelectorAll('.dropdown-menu a, .dropdown-menu .dropdown-item').forEach(item => {
+			if (item.textContent.includes("Frappe Support")) {
+				item.textContent = "Paradox Support";
+				item.onclick = function(e) {
+					e.preventDefault();
+					window.location.href = "mailto:support@paradox-bd.com";
+				};
+			}
+			if (item.textContent.includes("Frappe")) {
+				item.textContent = sanitizeText(item.textContent);
+			}
+		});
 	}
 
 	// Master run loop
@@ -211,6 +262,7 @@
 			cloakERPNextText();
 			injectHomepageCockpit();
 			redesignDesktopAppGrid();
+			hookAvatarMenu();
 
 			if (document.title && !document.title.includes("Paradox-BD ERP")) {
 				document.title = document.title.replace(/Frappe|ERPNext/gi, "Paradox-BD ERP");
