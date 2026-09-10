@@ -1,32 +1,109 @@
 /* ==========================================================================
-   Paradox-BD ERP: Modern Minimalist Enterprise Theme & Design System
+   Paradox-BD ERP: Modern Minimalist Enterprise Cockpit Design System
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   1. Design Tokens & CSS Variables
+   -------------------------------------------------------------------------- */
 :root {
   --paradox-primary: #6366f1;
   --paradox-primary-hover: #4f46e5;
   --paradox-primary-light: rgba(99, 102, 241, 0.12);
   --paradox-accent-cyan: #38bdf8;
   --paradox-accent-violet: #8b5cf6;
+  --paradox-accent-emerald: #10b981;
   --paradox-radius-sm: 6px;
   --paradox-radius-md: 10px;
-  --paradox-radius-lg: 16px;
-  --paradox-radius-xl: 20px;
+  --paradox-radius-lg: 14px;
+  --paradox-radius-xl: 18px;
+  --paradox-radius-2xl: 24px;
   --paradox-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --paradox-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --paradox-shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --paradox-shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --paradox-shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --paradox-shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.35), 0 4px 8px -2px rgba(0, 0, 0, 0.2);
   --paradox-glow: 0 0 20px rgba(99, 102, 241, 0.35);
+
+  --primary: #6366f1;
+  --brand-color: #6366f1;
 }
 
-/* 1. Global Typography & Smoothing */
+/* --------------------------------------------------------------------------
+   2. Dark Mode Overrides (Core UI Architecture)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"],
+:root:not([data-theme="light"]) {
+  --bg-color: #080c14;
+  --fg-color: #0f172a;
+  --card-bg: #0f172a;
+  --surface-cards: #0f172a;
+  --surface-modal: #111827;
+  --surface-menu-bar: #0b0f19;
+  --sidebar-border-color: rgba(255, 255, 255, 0.07);
+  --sidebar-hover-color: rgba(255, 255, 255, 0.04);
+  --sidebar-active-color: rgba(99, 102, 241, 0.15);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --outline-gray-1: rgba(255, 255, 255, 0.07);
+  --outline-gray-2: rgba(255, 255, 255, 0.1);
+  --outline-gray-3: rgba(255, 255, 255, 0.15);
+  --text-color: #f1f5f9;
+  --heading-color: #ffffff;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --subtle-accent: rgba(255, 255, 255, 0.03);
+  --subtle-fg: rgba(255, 255, 255, 0.06);
+  --control-bg: rgba(15, 23, 42, 0.85);
+  --control-bg-on-gray: rgba(30, 41, 59, 0.85);
+  --btn-default-bg: rgba(30, 41, 59, 0.7);
+  --btn-default-hover-bg: rgba(51, 65, 85, 0.8);
+  --btn-primary: #6366f1;
+}
+
+/* --------------------------------------------------------------------------
+   3. Light Mode Overrides (Refined SaaS Aesthetic)
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --bg-color: #f8fafc;
+  --fg-color: #ffffff;
+  --card-bg: #ffffff;
+  --surface-cards: #ffffff;
+  --surface-modal: #ffffff;
+  --surface-menu-bar: #ffffff;
+  --sidebar-border-color: #e2e8f0;
+  --sidebar-hover-color: #f1f5f9;
+  --sidebar-active-color: rgba(99, 102, 241, 0.1);
+  --border-color: #e2e8f0;
+  --outline-gray-1: #e2e8f0;
+  --outline-gray-2: #cbd5e1;
+  --text-color: #1e293b;
+  --heading-color: #0f172a;
+  --text-muted: #64748b;
+  --subtle-accent: #f8fafc;
+  --subtle-fg: #f1f5f9;
+  --control-bg: #f1f5f9;
+  --btn-primary: #6366f1;
+}
+
+/* --------------------------------------------------------------------------
+   4. Global Typography & Viewport Ambient Glow
+   -------------------------------------------------------------------------- */
 body, html {
   font-family: var(--paradox-font) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
+  letter-spacing: -0.01em;
 }
 
-/* 2. Login Page: High-Tech Glassmorphic Enterprise Portal */
+[data-theme="dark"] body {
+  background: 
+    radial-gradient(circle at 12% 10%, rgba(99, 102, 241, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 88% 90%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+    #080c14 !important;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   5. Login Portal: Frosted Glass Dark Cockpit
+   -------------------------------------------------------------------------- */
 body[data-path="login"],
 .page-login,
 .login-content {
@@ -54,12 +131,12 @@ body[data-path="login"] {
 }
 
 .login-content.page-card {
-  background: rgba(15, 23, 42, 0.75) !important;
-  backdrop-filter: blur(24px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  background: rgba(15, 23, 42, 0.78) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: var(--paradox-radius-xl) !important;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  border-radius: var(--paradox-radius-2xl) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   padding: 44px 38px !important;
   max-width: 440px !important;
   width: 100% !important;
@@ -75,7 +152,7 @@ body[data-path="login"] {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 3.5px;
   background: linear-gradient(90deg, #38bdf8 0%, #6366f1 50%, #8b5cf6 100%);
 }
 
@@ -85,11 +162,11 @@ body[data-path="login"] {
 }
 
 .login-content .app-logo {
-  height: 52px !important;
-  max-width: 220px !important;
+  height: 54px !important;
+  max-width: 240px !important;
   margin: 0 auto 16px auto !important;
   display: block !important;
-  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.35));
+  filter: drop-shadow(0 4px 14px rgba(99, 102, 241, 0.4));
 }
 
 .login-content .page-card-head-text h4 {
@@ -116,8 +193,8 @@ body[data-path="login"] {
 }
 
 .login-content .form-control {
-  background: rgba(15, 23, 42, 0.65) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: var(--paradox-radius-md) !important;
   color: #ffffff !important;
   height: 46px !important;
@@ -128,8 +205,8 @@ body[data-path="login"] {
 
 .login-content .form-control:focus {
   border-color: var(--paradox-primary) !important;
-  background: rgba(15, 23, 42, 0.9) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35) !important;
   outline: none !important;
 }
 
@@ -145,18 +222,6 @@ body[data-path="login"] {
   right: 14px !important;
 }
 
-.login-content .forgot-password-message a {
-  color: #818cf8 !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  transition: color 0.15s ease;
-}
-
-.login-content .forgot-password-message a:hover {
-  color: #38bdf8 !important;
-  text-decoration: none !important;
-}
-
 .login-content .btn-login {
   background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%) !important;
   color: #ffffff !important;
@@ -166,147 +231,229 @@ body[data-path="login"] {
   font-size: 15px !important;
   font-weight: 600 !important;
   letter-spacing: 0.4px !important;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45) !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  margin-top: 12px !important;
+  margin-top: 14px !important;
 }
 
 .login-content .btn-login:hover {
   transform: translateY(-1.5px) !important;
-  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.55) !important;
-  filter: brightness(1.05);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.6) !important;
+  filter: brightness(1.06);
 }
 
-.login-content .btn-login:active {
-  transform: translateY(0) !important;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4) !important;
+/* --------------------------------------------------------------------------
+   6. Frappe v16 Desk Left Navigation Sidebar (.body-sidebar)
+   -------------------------------------------------------------------------- */
+.body-sidebar {
+  border-right: 1px solid var(--sidebar-border-color) !important;
+  background: var(--surface-menu-bar) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.login-content .sign-up-message {
-  color: #94a3b8 !important;
-  font-size: 13.5px !important;
-  margin-top: 24px !important;
+[data-theme="dark"] .body-sidebar {
+  background: rgba(11, 15, 25, 0.92) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
 }
 
-.login-content .sign-up-message a {
-  color: #38bdf8 !important;
-  font-weight: 600 !important;
-}
-
-/* 3. Desk Top Navigation Bar: Frosted Glass & Minimal Header */
-.navbar.navbar-default,
-header.navbar,
-.standard-sidebar-section {
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  transition: background-color 0.2s ease, border-color 0.2s ease !important;
-}
-
-[data-theme="dark"] .navbar.navbar-default,
-[data-theme="dark"] header.navbar {
-  background-color: rgba(11, 15, 25, 0.88) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-[data-theme="light"] .navbar.navbar-default,
-[data-theme="light"] header.navbar {
-  background-color: rgba(255, 255, 255, 0.88) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
-}
-
-/* Brand Emblem in Navbar */
-.navbar-brand .app-logo,
-.navbar-brand img {
-  height: 28px !important;
-  width: auto !important;
-  border-radius: 6px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-/* Spotlight Command Search Bar */
-.search-bar .form-control {
-  border-radius: 20px !important;
-  padding-left: 36px !important;
-  padding-right: 48px !important;
-  height: 36px !important;
-  font-size: 13.5px !important;
-  border: 1px solid var(--border-color) !important;
-  background-color: var(--control-bg) !important;
-  transition: all 0.2s ease !important;
-}
-
-.search-bar .form-control:focus {
-  border-color: var(--paradox-primary) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
-  width: 280px !important;
-}
-
-/* 4. Desk Sidebar: Refined Pill Navigation */
-.desk-sidebar .sidebar-item-container,
-.desk-sidebar .standard-sidebar-item {
+/* Sidebar Workspace Header (Branding Box) */
+.sidebar-header {
   border-radius: var(--paradox-radius-md) !important;
-  margin: 3px 8px !important;
-  padding: 8px 12px !important;
-  font-weight: 500 !important;
-  font-size: 13.5px !important;
+  padding: 8px 10px !important;
+  margin: 4px 6px 12px 6px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid transparent !important;
+}
+
+.sidebar-header:hover {
+  background: var(--sidebar-hover-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Paradox Monogram Emblem in Sidebar Header */
+.sidebar-header .sidebar-item-icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--paradox-radius-md) !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(56, 189, 248, 0.25) 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.45) !important;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+
+.sidebar-header .sidebar-item-icon .header-logo {
+  width: 24px !important;
+  height: 24px !important;
+  background-image: url("/assets/erpnext/images/paradox-favicon.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  color: transparent !important;
+}
+
+.sidebar-header .sidebar-item-icon .header-logo * {
+  display: none !important;
+}
+
+.sidebar-header .header-title {
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: -0.2px !important;
+  color: var(--heading-color) !important;
+}
+
+.sidebar-header .header-subtitle {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  margin-top: 1px !important;
+}
+
+/* Navigation Links */
+.standard-sidebar-item {
+  border-radius: var(--paradox-radius-md) !important;
+  margin: 2px 6px !important;
   transition: all 0.15s ease !important;
 }
 
-.desk-sidebar .standard-sidebar-item.selected,
-.desk-sidebar .sidebar-item-container.active {
-  background: var(--paradox-primary-light) !important;
-  color: var(--paradox-primary) !important;
+.standard-sidebar-item .item-anchor {
+  height: 36px !important;
+  padding: 0 10px !important;
+  border-radius: var(--paradox-radius-md) !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: var(--text-color) !important;
+  transition: all 0.15s ease !important;
+}
+
+.standard-sidebar-item:not(.active-sidebar):hover .item-anchor {
+  background: var(--sidebar-hover-color) !important;
+  color: var(--heading-color) !important;
+  transform: translateX(2px);
+}
+
+.standard-sidebar-item.active-sidebar .item-anchor,
+.active-sidebar {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0.05) 100%) !important;
+  color: #ffffff !important;
+  border-left: 3.5px solid var(--paradox-primary) !important;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.25) !important;
   font-weight: 600 !important;
+}
+
+[data-theme="light"] .standard-sidebar-item.active-sidebar .item-anchor,
+[data-theme="light"] .active-sidebar {
+  background: rgba(99, 102, 241, 0.1) !important;
+  color: var(--paradox-primary) !important;
+  border-left: 3.5px solid var(--paradox-primary) !important;
+}
+
+/* User Profile Pill at Bottom */
+.dropdown-navbar-user .sidebar-user-button {
+  border-radius: var(--paradox-radius-md) !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--subtle-accent) !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-navbar-user .sidebar-user-button:hover {
+  background: var(--sidebar-hover-color) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2) !important;
+}
+
+.dropdown-navbar-user .avatar {
+  border: 2px solid var(--paradox-primary) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Desk Sticky Page Header (.page-head)
+   -------------------------------------------------------------------------- */
+.page-head {
+  background: var(--bg-color) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="dark"] .page-head {
+  background: rgba(8, 12, 20, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+.page-head .page-title .title-area .title-text {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.4px !important;
+  color: var(--heading-color) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Workspaces, Cards & Widgets (Linear/Raycast Cockpit Style)
+   -------------------------------------------------------------------------- */
+.widget,
+.desk-card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--paradox-radius-lg) !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden !important;
   position: relative;
 }
 
-.desk-sidebar .standard-sidebar-item.selected::before,
-.desk-sidebar .sidebar-item-container.active::before {
+[data-theme="dark"] .widget,
+[data-theme="dark"] .desk-card {
+  background-color: rgba(15, 23, 42, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.widget:hover,
+.desk-card:hover {
+  border-color: rgba(99, 102, 241, 0.45) !important;
+  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+/* Top Accent Line on Card Hover */
+.widget::before {
   content: "";
   position: absolute;
+  top: 0;
   left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 3.5px;
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(180deg, #38bdf8 0%, #6366f1 100%);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 50%, #8b5cf6 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.desk-sidebar .standard-sidebar-item:hover:not(.selected) {
-  background-color: var(--fg-hover-color) !important;
+.widget:hover::before {
+  opacity: 1;
 }
 
-/* 5. Workspaces & Cards */
-.widget.widget-head,
-.widget.dashboard-widget-box,
-.widget.links-widget-box,
-.widget.shortcut-widget-box,
-.widget.onboarding-widget-box,
-.widget.card,
-.desk-card {
-  border-radius: var(--paradox-radius-lg) !important;
-  border: 1px solid var(--border-color) !important;
-  background-color: var(--card-bg) !important;
-  box-shadow: var(--paradox-shadow-sm) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
-  overflow: hidden;
+/* KPI Number Metric Cards */
+.number-widget-box {
+  padding: 18px 22px !important;
 }
 
-.widget.shortcut-widget-box:hover,
-.widget.dashboard-widget-box:hover,
-.desk-card:hover {
-  box-shadow: var(--paradox-shadow-md) !important;
-  border-color: rgba(99, 102, 241, 0.35) !important;
-  transform: translateY(-1px);
-}
-
-/* Number KPI Metric Widgets */
-.dashboard-widget-box .number-widget {
-  padding: 18px 20px !important;
-}
-
-.dashboard-widget-box .widget-title {
+.number-widget-box .widget-head .widget-title {
   font-size: 12px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.6px !important;
@@ -314,14 +461,43 @@ header.navbar,
   color: var(--text-muted) !important;
 }
 
-.dashboard-widget-box .widget-body .number {
-  font-size: 28px !important;
+.number-widget-box .widget-body .widget-content .number {
+  font-size: 32px !important;
   font-weight: 700 !important;
-  letter-spacing: -0.5px !important;
+  letter-spacing: -0.6px !important;
+  color: #ffffff !important;
   margin: 6px 0 !important;
 }
 
-/* 6. Buttons & Interactive Controls */
+[data-theme="light"] .number-widget-box .widget-body .widget-content .number {
+  color: #0f172a !important;
+}
+
+/* Charts & Report Dashboards */
+.dashboard-widget-box {
+  padding: 16px 20px !important;
+}
+
+.dashboard-widget-box .widget-head .widget-title {
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.2px !important;
+}
+
+/* Shortcut & Quick Link Widgets */
+.shortcut-widget-box,
+.links-widget-box {
+  border-radius: var(--paradox-radius-md) !important;
+  padding: 14px 16px !important;
+}
+
+.shortcut-widget-box:hover {
+  border-color: var(--paradox-primary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Buttons, Controls & Modals
+   -------------------------------------------------------------------------- */
 .btn {
   border-radius: var(--paradox-radius-sm) !important;
   font-weight: 500 !important;
@@ -332,12 +508,12 @@ header.navbar,
   background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
   border: 1px solid #4f46e5 !important;
   color: #ffffff !important;
-  box-shadow: 0 1px 3px rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35) !important;
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.5) !important;
   transform: translateY(-0.5px);
 }
 
@@ -347,29 +523,10 @@ header.navbar,
 }
 
 .btn-default:hover {
-  background-color: var(--fg-hover-color) !important;
+  background-color: var(--sidebar-hover-color) !important;
   border-color: var(--text-muted) !important;
 }
 
-/* 7. Data Tables & Lists */
-.frappe-list .list-row-container {
-  border-bottom: 1px solid var(--border-color) !important;
-  transition: background-color 0.15s ease !important;
-}
-
-.frappe-list .list-row:hover {
-  background-color: var(--fg-hover-color) !important;
-}
-
-.indicator-pill {
-  border-radius: 12px !important;
-  padding: 3px 10px !important;
-  font-weight: 600 !important;
-  font-size: 11.5px !important;
-  letter-spacing: 0.2px !important;
-}
-
-/* 8. Form Fields & Controls */
 .form-control {
   border-radius: var(--paradox-radius-sm) !important;
   border: 1px solid var(--border-color) !important;
@@ -378,11 +535,22 @@ header.navbar,
 
 .form-control:focus {
   border-color: var(--paradox-primary) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
   outline: none !important;
 }
 
-/* Clean Custom Scrollbar */
+/* Modal Dialogs */
+.modal-content,
+.frappe-card {
+  background-color: var(--surface-modal) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--paradox-radius-xl) !important;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Minimalist Clean Scrollbars
+   -------------------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -393,10 +561,10 @@ header.navbar,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background: rgba(148, 163, 184, 0.25);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
+  background: rgba(148, 163, 184, 0.45);
 }
