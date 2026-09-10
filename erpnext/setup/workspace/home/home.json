@@ -3,9 +3,13 @@
   {
    "chart_name": "Profit and Loss",
    "label": "Profit and Loss"
+  },
+  {
+   "chart_name": "Top Customers",
+   "label": "Top Customers"
   }
  ],
- "content": "[{\"id\": \"797d6b3896\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Profit and Loss\", \"col\": 12}}, {\"id\": \"7dfaeec97e\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Annual Sales\", \"col\": 4}}, {\"id\": \"b76ffb894b\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Annual Purchase\", \"col\": 4}}, {\"id\": \"ba3943fb2d\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Stock Value\", \"col\": 4}}]",
+ "content": "[{\"id\": \"797d6b3896\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Profit and Loss\", \"col\": 8}}, {\"id\": \"pdx_chart2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Top Customers\", \"col\": 4}}, {\"id\": \"7dfaeec97e\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Annual Sales\", \"col\": 4}}, {\"id\": \"b76ffb894b\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Annual Purchase\", \"col\": 4}}, {\"id\": \"ba3943fb2d\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Stock Value\", \"col\": 4}}, {\"id\": \"pdx_nc1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Customers\", \"col\": 4}}, {\"id\": \"pdx_nc2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Suppliers\", \"col\": 4}}, {\"id\": \"pdx_nc3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Warehouses\", \"col\": 4}}]",
  "creation": "2020-01-23 13:46:38.833076",
  "custom_blocks": [],
  "docstatus": 0,
@@ -17,7 +21,7 @@
  "is_hidden": 0,
  "label": "Home",
  "links": [],
- "modified": "2026-08-26 18:34:03.000000",
+ "modified": "2026-09-11 02:30:00.000000",
  "modified_by": "Administrator",
  "module": "Setup",
  "name": "Home",
@@ -33,6 +37,18 @@
   {
    "label": "Total Stock Value",
    "number_card_name": "Total Stock Value"
+  },
+  {
+   "label": "Active Customers",
+   "number_card_name": "Active Customers"
+  },
+  {
+   "label": "Active Suppliers",
+   "number_card_name": "Active Suppliers"
+  },
+  {
+   "label": "Total Warehouses",
+   "number_card_name": "Total Warehouses"
   }
  ],
  "owner": "Administrator",
@@ -46,7 +62,48 @@
   }
  ],
  "sequence_id": 1.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "icon": "file-text",
+   "label": "Sales Invoices",
+   "link_to": "Sales Invoice",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "icon": "package",
+   "label": "Inventory Items",
+   "link_to": "Item",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "icon": "users",
+   "label": "Customers",
+   "link_to": "Customer",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "icon": "shopping-cart",
+   "label": "Suppliers",
+   "link_to": "Supplier",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "icon": "settings",
+   "label": "Paradox Settings",
+   "link_to": "Paradox Settings",
+   "type": "Workspace"
+  }
+ ],
  "standard": 1,
  "title": "Home",
  "type": "Workspace"

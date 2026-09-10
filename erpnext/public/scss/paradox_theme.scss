@@ -568,3 +568,246 @@ body[data-path="login"] {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.45);
 }
+
+/* --------------------------------------------------------------------------
+   11. Executive Homepage Cockpit Hero Banner
+   -------------------------------------------------------------------------- */
+.paradox-hero-banner {
+  background: 
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 50%, rgba(15, 23, 42, 0.9) 100%),
+    radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.2) 0%, transparent 50%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--paradox-radius-xl) !important;
+  padding: 26px 30px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.paradox-hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 50%, #8b5cf6 100%);
+}
+
+.paradox-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #38bdf8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: paradoxPulse 2s infinite;
+}
+
+@keyframes paradoxPulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.paradox-hero-title {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.5px !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.paradox-hero-subtitle {
+  font-size: 13.5px !important;
+  color: #94a3b8 !important;
+  margin: 0 0 20px 0 !important;
+  max-width: 650px !important;
+  line-height: 1.5 !important;
+}
+
+.paradox-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pdx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--paradox-radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pdx-btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: 1px solid #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+}
+
+.pdx-btn-primary:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.55);
+  transform: translateY(-1.5px);
+}
+
+.pdx-btn-default {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  backdrop-filter: blur(8px);
+}
+
+.pdx-btn-default:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   12. Desktop App Launcher Directory (#page-desktop / /desk)
+   -------------------------------------------------------------------------- */
+#page-desktop {
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+    #080c14 !important;
+}
+
+.desktop-wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 30px 24px !important;
+}
+
+.paradox-appgrid-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px 0 12px 0;
+}
+
+.appgrid-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.appgrid-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px 0;
+}
+
+.appgrid-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Desktop App Grid Items */
+.desktop-container .icons {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)) !important;
+  gap: 18px !important;
+  padding: 16px 0 !important;
+}
+
+.desktop-icon {
+  background: rgba(15, 23, 42, 0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--paradox-radius-lg) !important;
+  padding: 18px 12px 14px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  height: 128px !important;
+  width: auto !important;
+}
+
+.desktop-icon:hover {
+  transform: translateY(-4px) !important;
+  background: rgba(15, 23, 42, 0.88) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.5), 0 0 18px rgba(99, 102, 241, 0.25) !important;
+}
+
+.desktop-icon .icon-container {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(56, 189, 248, 0.2) 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 10px !important;
+  transition: transform 0.2s ease !important;
+}
+
+.desktop-icon:hover .icon-container {
+  transform: scale(1.08);
+}
+
+.desktop-icon .icon-title {
+  color: #f1f5f9 !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.2px !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+}
+
+/* Hide Developer Framework and Legacy Icons */
+.desktop-icon[data-id="Framework"],
+.desktop-icon[data-id="Frappe Framework"],
+.desktop-icon[data-id="ERPNext"] {
+  display: none !important;
+}
+
