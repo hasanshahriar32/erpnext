@@ -131,12 +131,19 @@
 		if (!document.getElementById('paradox-cockpit-hero')) {
 			const hero = document.createElement('div');
 			hero.id = 'paradox-cockpit-hero';
-			hero.className = 'paradox-hero-banner';
+			hero.className = 'paradox-cockpit-wrapper';
 			hero.innerHTML = `
-				<div class="paradox-hero-content">
-					<div class="paradox-hero-badge">
-						<span class="pulse-dot"></span>
-						<span>PARADOX-BD ENTERPRISE COCKPIT</span>
+				<!-- 1. Executive Cockpit Banner Card -->
+				<div class="paradox-hero-card">
+					<div class="paradox-hero-top">
+						<div class="paradox-hero-badge">
+							<span class="pulse-dot"></span>
+							<span>PARADOX-BD ENTERPRISE COCKPIT</span>
+						</div>
+						<div class="paradox-system-status">
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+							<span>System Status: Active • All Ledgers Synchronized</span>
+						</div>
 					</div>
 					<h1 class="paradox-hero-title">Executive Operations & Financial Intelligence</h1>
 					<p class="paradox-hero-subtitle">Unified command center for multi-channel sales, procurement telemetry, inventory lifecycle, and corporate ledgers.</p>
@@ -161,10 +168,214 @@
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
 							<span>General Ledger</span>
 						</button>
+						<button class="pdx-btn pdx-btn-default" onclick="frappe.set_route('List', 'Sales Invoice')">
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+							<span>Sales Invoices</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- 2. Luxury 4-Card KPI Strip -->
+				<div class="pdx-kpi-grid">
+					<div class="pdx-kpi-card" onclick="frappe.set_route('List', 'Sales Invoice')">
+						<div class="pdx-kpi-label">
+							<span>Gross Sales (YTD)</span>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+						</div>
+						<div class="pdx-kpi-value">$ 363,000.00</div>
+						<div class="pdx-kpi-footer">
+							<span class="pdx-trend-up">↑ +18.4%</span>
+							<span>vs last quarter</span>
+						</div>
+					</div>
+					<div class="pdx-kpi-card" onclick="frappe.set_route('List', 'Sales Invoice', {'status': 'Overdue'})">
+						<div class="pdx-kpi-label">
+							<span>Receivables Outstanding</span>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+						</div>
+						<div class="pdx-kpi-value">$ 316,000.00</div>
+						<div class="pdx-kpi-footer">
+							<span style="color: #ef4444; font-weight: 600;">3 Invoices</span>
+							<span>pending clearance</span>
+						</div>
+					</div>
+					<div class="pdx-kpi-card" onclick="frappe.set_route('List', 'Item')">
+						<div class="pdx-kpi-label">
+							<span>Inventory Stock Value</span>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="m7.5 4.27 9 5.15M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+						</div>
+						<div class="pdx-kpi-value">$ 95,390.00</div>
+						<div class="pdx-kpi-footer">
+							<span class="pdx-trend-up">↑ 4.2x</span>
+							<span>turnover velocity</span>
+						</div>
+					</div>
+					<div class="pdx-kpi-card" onclick="frappe.set_route('query-report', 'General Ledger')">
+						<div class="pdx-kpi-label">
+							<span>Ledger Balance Ratio</span>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+						</div>
+						<div class="pdx-kpi-value">100.00%</div>
+						<div class="pdx-kpi-footer">
+							<span style="color: #8b5cf6; font-weight: 600;">Verified</span>
+							<span>audited accounts</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 3. Two-Column Analytics & Live Ledger Stream -->
+				<div class="pdx-two-col">
+					<div id="pdx-chart-host" class="pdx-panel">
+						<div class="pdx-panel-header">
+							<div class="pdx-panel-title">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+								<span>Fiscal Performance & Profit Ratio</span>
+							</div>
+							<button class="btn btn-xs btn-default" onclick="frappe.set_route('query-report', 'Profit and Loss Statement')">Statement</button>
+						</div>
+						<div id="pdx-chart-destination"></div>
+					</div>
+					<div class="pdx-panel">
+						<div class="pdx-panel-header">
+							<div class="pdx-panel-title">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+								<span>Live Ledger Stream</span>
+							</div>
+							<span class="pdx-badge" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">Latest 5</span>
+						</div>
+						<div class="pdx-ledger-list">
+							<div class="pdx-ledger-row" onclick="frappe.set_route('Form', 'Sales Invoice', 'ACC-SINV-2026-00005')">
+								<div class="pdx-ledger-info">
+									<span class="pdx-ledger-id">Grant Plastics Ltd.</span>
+									<span class="pdx-ledger-party">ACC-SINV-2026-00005 • 2026-05-31</span>
+								</div>
+								<div>
+									<div class="pdx-ledger-amount">$ 20,000.00</div>
+									<span class="pdx-badge pdx-badge-overdue">Overdue</span>
+								</div>
+							</div>
+							<div class="pdx-ledger-row" onclick="frappe.set_route('Form', 'Sales Invoice', 'ACC-SINV-2026-00004')">
+								<div class="pdx-ledger-info">
+									<span class="pdx-ledger-id">West View Software Ltd.</span>
+									<span class="pdx-ledger-party">ACC-SINV-2026-00004 • 2026-02-09</span>
+								</div>
+								<div>
+									<div class="pdx-ledger-amount">$ 32,000.00</div>
+									<span class="pdx-badge pdx-badge-paid">Paid</span>
+								</div>
+							</div>
+							<div class="pdx-ledger-row" onclick="frappe.set_route('Form', 'Sales Invoice', 'ACC-SINV-2026-00003')">
+								<div class="pdx-ledger-info">
+									<span class="pdx-ledger-id">West View Software Ltd.</span>
+									<span class="pdx-ledger-party">ACC-SINV-2026-00003 • 2026-03-11</span>
+								</div>
+								<div>
+									<div class="pdx-ledger-amount">$ 229,000.00</div>
+									<span class="pdx-badge pdx-badge-overdue">Overdue</span>
+								</div>
+							</div>
+							<div class="pdx-ledger-row" onclick="frappe.set_route('Form', 'Sales Invoice', 'ACC-SINV-2026-00002')">
+								<div class="pdx-ledger-info">
+									<span class="pdx-ledger-id">Palmer Productions Ltd.</span>
+									<span class="pdx-ledger-party">ACC-SINV-2026-00002 • 2026-04-09</span>
+								</div>
+								<div>
+									<div class="pdx-ledger-amount">$ 15,000.00</div>
+									<span class="pdx-badge pdx-badge-paid">Paid</span>
+								</div>
+							</div>
+							<div class="pdx-ledger-row" onclick="frappe.set_route('Form', 'Sales Invoice', 'ACC-SINV-2026-00001')">
+								<div class="pdx-ledger-info">
+									<span class="pdx-ledger-id">Grant Plastics Ltd.</span>
+									<span class="pdx-ledger-party">ACC-SINV-2026-00001 • 2026-08-04</span>
+								</div>
+								<div>
+									<div class="pdx-ledger-amount">$ 67,000.00</div>
+									<span class="pdx-badge pdx-badge-overdue">Overdue</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 4. Core Operational Gateways Grid -->
+				<div style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+					<span style="font-size: 15px; font-weight: 700; color: var(--heading-color);">Enterprise Operational Gateways</span>
+					<span style="font-size: 12px; color: var(--text-muted);">Quick Workspace Switcher</span>
+				</div>
+				<div class="pdx-module-grid">
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Accounting')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%); color: #10b981;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v12"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Accounting & Corporate Finance</div>
+							<div class="pdx-module-desc">General ledger, chart of accounts, tax templates, multi-currency journals.</div>
+						</div>
+					</div>
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Selling')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%); color: #ef4444;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Commercial Sales & Orders</div>
+							<div class="pdx-module-desc">Quotations, customer profiles, sales invoices, POS register terminals.</div>
+						</div>
+					</div>
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Stock')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(14, 165, 233, 0.2) 100%); color: #38bdf8;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Inventory & Warehousing</div>
+							<div class="pdx-module-desc">Stock reconciliation, warehouse ledgers, item catalog, batch tracking.</div>
+						</div>
+					</div>
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Buying')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(234, 88, 12, 0.2) 100%); color: #f97316;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Procurement & Sourcing</div>
+							<div class="pdx-module-desc">Purchase orders, supplier quotations, material receipts, pricing.</div>
+						</div>
+					</div>
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Manufacturing')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%); color: #8b5cf6;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8 4V7l8 4v10"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Manufacturing & BOM</div>
+							<div class="pdx-module-desc">Production planning, bills of materials, work orders, job cards.</div>
+						</div>
+					</div>
+					<div class="pdx-module-card" onclick="frappe.set_route('workspace', 'Assets')">
+						<div class="pdx-module-icon" style="background: linear-gradient(135deg, rgba(234, 179, 8, 0.2) 0%, rgba(202, 138, 4, 0.2) 100%); color: #eab308;">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+						</div>
+						<div>
+							<div class="pdx-module-title">Asset Lifecycle & Management</div>
+							<div class="pdx-module-desc">Depreciation schedules, maintenance records, asset transfers.</div>
+						</div>
 					</div>
 				</div>
 			`;
 			pageBody.prepend(hero);
+
+			// Relocate native chart into our destination panel
+			setTimeout(() => {
+				const nativeChart = document.querySelector('.dashboard-widget-box');
+				const dest = document.getElementById('pdx-chart-destination');
+				if (nativeChart && dest && !dest.contains(nativeChart)) {
+					dest.appendChild(nativeChart);
+				}
+				// Clean redundant native number widgets since they are integrated into our KPI strip
+				document.querySelectorAll('.widget-group').forEach(el => {
+					if (el.id !== 'pdx-chart-host' && el.querySelector('.number-widget-box')) {
+						el.style.display = 'none';
+					}
+				});
+			}, 100);
 		}
 	}
 
