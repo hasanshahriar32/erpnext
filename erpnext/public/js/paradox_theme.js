@@ -362,20 +362,42 @@
 			`;
 			pageBody.prepend(hero);
 
-			// Relocate native chart into our destination panel
-			setTimeout(() => {
-				const nativeChart = document.querySelector('.dashboard-widget-box');
+			function relocateDashboardElements() {
 				const dest = document.getElementById('pdx-chart-destination');
-				if (nativeChart && dest && !dest.contains(nativeChart)) {
+				if (!dest) return;
+				const nativeChart = document.querySelector('.layout-main-section .dashboard-widget-box:not(#pdx-chart-destination .dashboard-widget-box), .codex-editor .dashboard-widget-box');
+				if (nativeChart && !dest.contains(nativeChart)) {
 					dest.appendChild(nativeChart);
+					setTimeout(() => {
+						window.dispatchEvent(new Event('resize'));
+					}, 50);
 				}
 				// Clean redundant native number widgets since they are integrated into our KPI strip
-				document.querySelectorAll('.widget-group').forEach(el => {
-					if (el.id !== 'pdx-chart-host' && el.querySelector('.number-widget-box')) {
+				document.querySelectorAll('.widget-group, .codex-editor .ce-block').forEach(el => {
+					if (!el.contains(dest) && (el.querySelector('.number-widget-box') || el.classList.contains('number-widget-box'))) {
 						el.style.display = 'none';
 					}
 				});
-			}, 100);
+				// Hide remaining empty codex-editor containers below cockpit so there's no awkward trailing space
+				document.querySelectorAll('.codex-editor').forEach(el => {
+					if (!el.contains(dest)) {
+						const visibleWidgets = el.querySelectorAll('.shortcut-widget-box, .card-widget-box');
+						if (visibleWidgets.length === 0) {
+							el.style.display = 'none';
+						}
+					}
+				});
+			}
+
+			// Run immediately and across multiple ticks to capture async Frappe workspace renders
+			[50, 200, 500, 1000, 2000, 3500].forEach(delay => setTimeout(relocateDashboardElements, delay));
+
+			if (window.MutationObserver) {
+				const obs = new MutationObserver(() => {
+					relocateDashboardElements();
+				});
+				obs.observe(pageBody, { childList: true, subtree: true });
+			}
 		}
 	}
 
