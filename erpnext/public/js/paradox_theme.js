@@ -438,6 +438,14 @@
 		headingEls.forEach(el => {
 			el.style.setProperty('color', isLight ? '#0f172a' : '#ffffff', 'important');
 		});
+
+		// Dynamically synchronize brand logo asset between light and dark themes
+		const targetLogo = isLight ? "/assets/erpnext/images/paradox-logo-light.svg" : "/assets/erpnext/images/paradox-logo.svg";
+		document.querySelectorAll('img[src*="paradox-logo"]').forEach(img => {
+			if (!img.src.includes("-favicon") && !img.src.endsWith(targetLogo)) {
+				img.src = targetLogo;
+			}
+		});
 	}
 
 	// 9. Avatar Dropdown Menu Hook
