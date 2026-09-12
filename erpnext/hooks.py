@@ -777,3 +777,8 @@ repost_allowed_doctypes = [
 	"Payment Entry",
 	"Purchase Receipt",
 ]
+
+before_login = [
+	"erpnext.paradox_auth.block_administrator_login",
+]
+
